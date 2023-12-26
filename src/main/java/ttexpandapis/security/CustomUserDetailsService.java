@@ -1,5 +1,7 @@
 package ttexpandapis.security;
 
+import java.util.List;
+import ttexpandapis.entity.User;
 import ttexpandapis.exception.UsernameNotFoundException;
 import ttexpandapis.repository.UserRepository;
 import lombok.RequiredArgsConstructor;

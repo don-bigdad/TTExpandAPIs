@@ -4,6 +4,7 @@ import ttexpandapis.dto.CreateUserDto;
 import ttexpandapis.dto.UserLoginRequestDto;
 import ttexpandapis.dto.UserLoginResponseDto;
 import ttexpandapis.dto.UserResponseDto;
+import ttexpandapis.exception.RegistrationException;
 import ttexpandapis.security.AuthenticationService;
 import ttexpandapis.service.UserService;
 import jakarta.validation.Valid;
