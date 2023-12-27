@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import ttexpandapis.dto.ProductRequestDto;
 import ttexpandapis.service.impl.ProductService;
@@ -21,13 +22,9 @@ public class ProductController {
     private final ProductService productService;
 
     @PostMapping("/add")
+    @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<String> addProducts(@RequestBody @Valid ProductRequestDto request) {
-        try {
-            productService.saveProducts(request);
-            return new ResponseEntity<>("Products added successfully", HttpStatus.CREATED);
-        } catch (Exception e) {
-            return new ResponseEntity<>("Failed to add products: " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
-        }
+        return productService.saveProducts(request);
     }
 
     @GetMapping("/get")

@@ -4,6 +4,8 @@ import jakarta.transaction.Transactional;
 import java.util.List;
 import java.util.Map;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 import ttexpandapis.dto.ProductRequestDto;
@@ -15,7 +17,7 @@ public class ProductService {
 
 
     @Transactional
-    public void saveProducts(ProductRequestDto product) {
+    public ResponseEntity<String> saveProducts(ProductRequestDto product) {
         String tableName = product.table();
         for (Map<String,String> element: product.records()) {
 
@@ -23,10 +25,11 @@ public class ProductService {
 
             saveProduct(tableName, element);
         }
+        return new ResponseEntity<>("Products added successfully", HttpStatus.CREATED);
     }
 
     public List<Map<String, Object>> getItems() {
-        String sql = "SELECT * FROM testtaskexpandapis.products";
+        String sql = "SELECT * FROM products";
         return jdbcTemplate.queryForList(sql);
     }
 
